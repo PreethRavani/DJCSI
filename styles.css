@@ -1636,7 +1636,7 @@ input {
   z-index: 2;
 }
 
-@media (max-width: 768px) {
+@media (max-width<= 768px) {
   .hero-bg-img {
     background-position: 70% right;
   }
@@ -1829,7 +1829,7 @@ input {
 
 /* ===== MOBILE BACKGROUND FRAMING ===== */
 /* Prefer sky / sun / moon / mountains over ground on small screens */
-@media (max-width: 768px) {
+@media (max-width<= 768px) {
   .tl-bg {
     background-position: right 58% !important;
     background-size: cover !important;
