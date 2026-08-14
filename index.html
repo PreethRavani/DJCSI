@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BrickCraft — 24-hour college hackathon. Build. Break. Rebuild."
+    />
+    <title>BRICKCRAFT | 24-Hour Hackathon</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader">
+      <div class="loader-cube"></div>
+      <div class="loader-text">LOADING WORLD...</div>
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo"
+          ><img src="assets/icons/logo.png" alt="Logo" class="logo-block" />
+          <div>BRICKCRAFT<span>24-HOUR HACKATHON</span></div></a
+        >
+        <ul class="nav-links">
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#domains">Domains</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#prizes">Prizes</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <button class="nav-cta" onclick="scrollToId('register')">
+          Register Now
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" id="closeMenu">X</button>
+      <a href="#about" class="m-link">About</a>
+      <a href="#domains" class="m-link">Domains</a>
+      <a href="#timeline" class="m-link">Timeline</a>
+      <a href="#register" class="m-link">Register</a>
+      <a href="#prizes" class="m-link">Prizes</a>
+      <a href="#faq" class="m-link">FAQ</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div
+        class="hero-bg-img"
+        style="
+          background-image: url(&quot;assets/backgrounds/hero-day.webp&quot;);
+        "
+      ></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">Hardcore Mode ~ 24 Hours</div>
+        <h1>
+          <span class="w hero-line">BUILD.</span><br /><span class="r hero-line"
+            >BREAK.</span
+          ><br /><span class="g hero-line">REBUILD.</span>
+        </h1>
+        <p class="hero-sub">• ONE NIGHT<br /> • ZERO SLEEP<br /> • ENDLESS CREATIVITY</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="scrollToId('register')">
+            Join the Adventure
+          </button>
+          <button class="btn btn-ghost" onclick="scrollToId('about')">
+            Explore More
+          </button>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="mouse"></div>
+        SCROLL TO BUILD
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div
+        class="about-bg"
+        style="
+          background-image: url(&quot;assets/backgrounds/about-world.webp&quot;);
+        "
+      ></div>
+      <div class="about-overlay"></div>
+      <div class="container about-inner">
+        <p class="sec-label">
+          <span class="sec-num">01</span> ABOUT BRICKCRAFT
+        </p>
+        <div class="about-grid">
+          <div class="steve-wrap">
+            <img
+              src="assets/characters/steve-wave.png"
+              alt="Steve"
+              class="steve-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-right">
+            <div class="speech"><span class="tw" id="typewriter"></span></div>
+            <div class="features">
+              <div class="feat">
+                <div class="feat-icon">24</div>
+                <div class="feat-text">
+                  <strong>24 HOURS</strong><span>Non-stop building</span>
+                </div>
+              </div>
+              <div class="feat">
+                <div class="feat-icon"></div>
+                <div class="feat-text">
+                  <strong>TEAM OF 2-4</strong><span>Build together</span>
+                </div>
+              </div>
+              <div class="feat">
+                <div class="feat-icon">6</div>
+                <div class="feat-text">
+                  <strong>DOMAINS</strong><span>Choose your challenge</span>
+                </div>
+              </div>
+              <div class="feat">
+                <div class="feat-icon">$</div>
+                <div class="feat-text">
+                  <strong>PRIZES</strong><span>Rewards Upto Rs.50000</span>
+                </div>
+              </div>
+              <div class="feat">
+                <div class="feat-icon">M</div>
+                <div class="feat-text">
+                  <strong>MENTORS</strong><span>Learn. Build. Ship.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grass-strip"></div>
+
+    <!-- DOMAINS -->
+    <section class="domains" id="domains">
+      <div class="domains-pin" id="domainsPin">
+        <div class="domains-header">
+          <p class="sec-label">CHOOSE YOUR DOMAIN</p>
+          <h2 class="sec-title">Pick the world you want to build in.</h2>
+        </div>
+        <div class="domains-grid">
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img src="assets/icons/ai-ml.png" alt="AI/ML" loading="lazy" />
+            </div>
+            <h3>AI / ML</h3>
+            <p>Build intelligent solutions</p>
+          </div>
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img
+                src="assets/icons/web-app.png"
+                alt="Web/App"
+                loading="lazy"
+              />
+            </div>
+            <h3>WEB / APP</h3>
+            <p>Create impactful apps</p>
+          </div>
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img
+                src="assets/icons/blockchain.png"
+                alt="Blockchain"
+                loading="lazy"
+              />
+            </div>
+            <h3>BLOCKCHAIN</h3>
+            <p>Decentralized apps</p>
+          </div>
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img
+                src="assets/icons/cybersecurity.png"
+                alt="Cybersecurity"
+                loading="lazy"
+              />
+            </div>
+            <h3>CYBERSECURITY</h3>
+            <p>Secure the digital world</p>
+          </div>
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img
+                src="assets/icons/iot-hardware.png"
+                alt="IoT"
+                loading="lazy"
+              />
+            </div>
+            <h3>IOT / HARDWARE</h3>
+            <p>Smart devices</p>
+          </div>
+          <div class="domain-card">
+            <div class="domain-icon">
+              <img
+                src="assets/icons/open-innovation.png"
+                alt="Open Innovation"
+                loading="lazy"
+              />
+            </div>
+            <h3>OPEN INNOVATION</h3>
+            <p>Anything is possible</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-sec" id="timeline">
+      <div class="timeline-pin" id="timelinePin">
+        <div
+          class="tl-bg tl-bg-day"
+          id="tlBgDay"
+          style="
+            background-image: url(&quot;assets/backgrounds/timeline-day.webp&quot;);
+          "
+        ></div>
+        <div
+          class="tl-bg tl-bg-sunset"
+          id="tlBgSunset"
+          style="
+            background-image: url(&quot;assets/backgrounds/timeline-sunset.webp&quot;);
+          "
+        ></div>
+        <div
+          class="tl-bg tl-bg-night"
+          id="tlBgNight"
+          style="
+            background-image: url(&quot;assets/backgrounds/timeline-night.webp&quot;);
+          "
+        ></div>
+        <div class="tl-overlay" id="tlOverlay"></div>
+        <div class="tl-content" id="tlContent">
+          <p class="sec-label">
+            <span class="sec-num">03</span> 24-HOUR BUILD TIMELINE
+          </p>
+          <h2 class="sec-title">From Dusk to Dawn.</h2>
+          <div class="tl-track">
+            <div class="tl-line">
+              <div class="tl-progress" id="tlProgress"></div>
+            </div>
+            <div class="tl-nodes">
+              <div
+                class="tl-node"
+                data-desc="Participants arrive, complete registration, collect badges and set up their stations."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/registration.png" alt="" />
+                </div>
+                <div class="time">05:00 PM</div>
+                <div class="label">CHECK-IN</div>
+              </div>
+              <div
+                class="tl-node"
+                data-desc="Themes, tracks and rules announced. Sponsors present challenges. Teams finalize."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/opening.png" alt="" />
+                </div>
+                <div class="time">06:00 PM</div>
+                <div class="label">KICKOFF</div>
+              </div>
+              <div
+                class="tl-node"
+                data-desc="Dinner break. Mentors review ideas, refine scopes and fix early tech issues."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/evening.png" alt="" />
+                </div>
+                <div class="time">09:00 PM</div>
+                <div class="label">DINNER</div>
+              </div>
+              <div
+                class="tl-node"
+                data-desc="Midnight recharge: snacks, coffee and networking. Build connections."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/hacking.png" alt="" />
+                </div>
+                <div class="time">02:00 AM</div>
+                <div class="label">MIDNIGHT</div>
+              </div>
+              <div
+                class="tl-node"
+                data-desc="Breakfast served. Final mentor check ~ prioritize features and prep your pitch."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/checkpoint.png" alt="" />
+                </div>
+                <div class="time">09:00 AM</div>
+                <div class="label">BREAKFAST</div>
+              </div>
+              <div
+                class="tl-node"
+                data-desc="Coding ends. Submit, pitch to judges, and champions are crowned."
+              >
+                <div class="icon-box">
+                  <img src="assets/timeline/final-push.png" alt="" />
+                </div>
+                <div class="time">06:00 PM</div>
+                <div class="label">CLOSING</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-event-box">
+            <span class="tw" id="tlTypewriter"></span>
+          </div>
+          <p class="tl-hint">
+            Scroll through the 24 hours. The sky shifts with every milestone.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section class="register" id="register">
+      <div class="container">
+        <div class="reg-header">
+          <p class="sec-label">
+            <span class="sec-num">04</span> REGISTER YOUR TEAM
+          </p>
+          <h2 class="sec-title">Assemble Your Party</h2>
+        </div>
+        <div class="reg-grid">
+          <form class="reg-form" id="regForm" onsubmit="handleReg(event)">
+            <h3>TEAM DETAILS</h3>
+            <div class="fg">
+              <label>TEAM NAME</label
+              ><input
+                type="text"
+                name="team"
+                placeholder="Team name"
+                required
+              />
+            </div>
+            <div class="fg">
+              <label>CAPTAIN</label
+              ><input
+                type="text"
+                name="captain"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div class="fg">
+              <label>EMAIL</label
+              ><input
+                type="email"
+                name="email"
+                placeholder="you@college.edu"
+                required
+              />
+            </div>
+            <div class="fg">
+              <label>COLLEGE</label
+              ><input type="text" name="org" placeholder="College" required />
+            </div>
+            <div class="fg">
+              <label>PHONE</label
+              ><input type="tel" name="phone" placeholder="+91 ..." required />
+            </div>
+          </form>
+          <div class="reg-chars">
+            <h3>SELECT TEAM SIZE</h3>
+            <div class="size-row">
+              <button type="button" class="size-opt active" data-size="2">
+                2
+              </button>
+              <button type="button" class="size-opt" data-size="3">3</button>
+              <button type="button" class="size-opt" data-size="4">4</button>
+            </div>
+            <div class="chars-row" id="charsRow">
+              <div class="char selected">
+                <img
+                  src="assets/characters/member-1-diamond.png"
+                  alt="Captain"
+                  class="char-img"
+                />
+                <div class="char-name">CAPTAIN</div>
+              </div>
+              <div class="char selected">
+                <img
+                  src="assets/characters/member-2-iron.png"
+                  alt="Member 2"
+                  class="char-img"
+                />
+                <div class="char-name">MEMBER 2</div>
+              </div>
+              <div class="char">
+                <img
+                  src="assets/characters/member-3-iron-bow.png"
+                  alt="Member 3"
+                  class="char-img"
+                />
+                <div class="char-name">MEMBER 3</div>
+              </div>
+              <div class="char">
+                <img
+                  src="assets/characters/member-4-gold.png"
+                  alt="Member 4"
+                  class="char-img"
+                />
+                <div class="char-name">MEMBER 4</div>
+              </div>
+            </div>
+          </div>
+          <div class="reg-summary">
+            <h3>READY TO BUILD?</h3>
+            <p>Review your team and embark on this epic journey.</p>
+            <button
+              class="btn btn-primary"
+              type="button"
+              onclick="document.getElementById('regForm').requestSubmit()"
+            >
+              Register Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIZES -->
+    <section class="prizes" id="prizes">
+      <div
+        class="prizes-bg"
+        style="
+          background-image: url(&quot;assets/backgrounds/prizes-world.webp&quot;);
+        "
+      ></div>
+      <div class="prizes-overlay"></div>
+      <div class="container prizes-inner">
+        <div class="prizes-header">
+          <p class="sec-label">
+            <span class="sec-num">05</span> AMAZING PRIZES
+          </p>
+          <h2 class="sec-title">Claim the Loot</h2>
+        </div>
+        <div class="prize-list" id="prizeList">
+          <div class="prize-card gold">
+            <div class="prize-rank">WINNER</div>
+            <div class="prize-amt">Rs 50,000 +</div>
+            <div class="prize-extra">Goodies & Mentorship</div>
+          </div>
+          <div class="prize-card silver">
+            <div class="prize-rank">RUNNER UP</div>
+            <div class="prize-amt">Rs 30,000 +</div>
+            <div class="prize-extra">Goodies</div>
+          </div>
+          <div class="prize-card bronze">
+            <div class="prize-rank">SPECIAL</div>
+            <div class="prize-amt">Rs 10,000 +</div>
+            <div class="prize-extra">Goodies</div>
+          </div>
+          <div class="prize-card emerald">
+            <div class="prize-rank">COMPLETION</div>
+            <div class="prize-amt">Certificates for all</div>
+            <div class="prize-extra"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPONSORS -->
+    <section class="sponsors" id="sponsors">
+      <div
+        class="sponsors-bg"
+        style="
+          background-image: url(&quot;assets/backgrounds/sponsors-village.webp&quot;);
+        "
+      ></div>
+      <div class="sponsors-overlay"></div>
+      <div class="container sponsors-inner">
+        <div class="sponsors-header">
+          <p class="sec-label"><span class="sec-num">06</span> OUR SPONSORS</p>
+          <h2 class="sec-title">Allies of the Realm</h2>
+          <p class="sponsors-sub">The guilds that power this adventure</p>
+        </div>
+        <div class="sponsor-grid" id="sponsorGrid">
+          <div class="sponsor-sign">
+            <div class="sign-frame">
+              <span class="sign-text">Ettarra Coffee</span>
+            </div>
+            <div class="sign-roof"></div>
+          </div>
+          <div class="sponsor-sign">
+            <div class="sign-frame">
+              <span class="sign-text">File Coin</span>
+            </div>
+            <div class="sign-roof"></div>
+          </div>
+          <div class="sponsor-sign">
+            <div class="sign-frame">
+              <span class="sign-text">Devfolio</span>
+            </div>
+            <div class="sign-roof"></div>
+          </div>
+          <div class="sponsor-sign">
+            <div class="sign-frame"><span class="sign-text">Polygon</span></div>
+            <div class="sign-roof"></div>
+          </div>
+          <div class="sponsor-sign">
+            <div class="sign-frame"><span class="sign-text">Solana</span></div>
+            <div class="sign-roof"></div>
+          </div>
+          <div class="sponsor-sign">
+            <div class="sign-frame"><span class="sign-text">Replit</span></div>
+            <div class="sign-roof"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div
+        class="faq-bg"
+        style="
+          background-image: url(&quot;assets/backgrounds/faq-workshop.webp&quot;);
+        "
+      ></div>
+      <div class="faq-overlay"></div>
+      <div class="container faq-inner">
+        <div class="faq-header">
+          <p class="sec-label"><span class="sec-num">07</span> FAQ</p>
+          <h2 class="sec-title">Crafting Answers</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">
+              Who can participate? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">Any college student. Teams of 2-4.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Is there a registration fee? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">No. BrickCraft is free.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Can I participate solo? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">Minimum 2. Solo will be matched.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              What should we bring? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">Laptop, charger, student ID.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Will food be provided? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">Yes, meals and snacks.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Can we use AI tools? <span class="pm">+</span>
+            </button>
+            <div class="faq-a">Yes, with disclosure.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final" id="final">
+      <div
+        class="final-bg"
+        style="
+          background-image: url(&quot;assets/backgrounds/final-night.webp&quot;);
+        "
+      ></div>
+      <div class="final-overlay"></div>
+      <div class="container final-inner">
+        <p class="sec-label">
+          <span class="sec-num">08</span> YOUR BUILD STARTS HERE.
+        </p>
+        <h2 class="sec-title">
+          24 HOURS. ONE CHALLENGE.<br />WHAT WILL YOU BUILD?
+        </h2>
+        <p>The world is ready. Your team is waiting.</p>
+        <button class="btn btn-primary" onclick="scrollToId('register')">
+          Register Now
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            BRICKCRAFT<span>24-HOUR HACKATHON</span>
+          </div>
+          <div class="footer-links">
+            <a href="#">Privacy</a><a href="#">Terms</a
+            ><a href="#">Code of Conduct</a>
+          </div>
+        </div>
+        <div class="footer-copy">&copy; 2026 DJCSI. All rights reserved.</div>
+      </div>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
