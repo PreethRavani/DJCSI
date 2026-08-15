@@ -178,7 +178,6 @@ ScrollTrigger.matchMedia({
 
 window.addEventListener("load", () => ScrollTrigger.refresh());
 
-// Timeline event typewriter
 let tlTwIdx = 0;
 let tlTwText = "";
 let tlTwTimer = null;
