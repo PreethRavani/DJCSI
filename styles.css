@@ -308,6 +308,13 @@ input {
   color: var(--warm);
   text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
 }
+.sec-sub {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.55rem, 2vw, 0.75rem);
+  line-height: 1.4;
+  color: #9CA3AF;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+}
 .sec-num {
   font-family: var(--font-pixel);
   font-size: 0.7rem;
@@ -472,8 +479,8 @@ input {
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: 1fr;      /* ← forces every row to share one height */
-  align-items: stretch;      /* ← explicit, don't rely on the default */
+  grid-auto-rows: 1fr;
+  align-items: stretch;      
   gap: 0.75rem;
 }
 .feat {
@@ -544,7 +551,6 @@ input {
   );
 }
 
-/* DOMAINS */
 .domains {
   position: relative;
   background: var(--bg);
@@ -619,7 +625,6 @@ input {
   line-height: 1.4;
 }
 
-/* TIMELINE */
 .timeline-sec {
   position: relative;
   overflow: hidden;
@@ -897,7 +902,6 @@ input {
   justify-content: center;
 }
 
-/* PRIZES */
 .prizes {
   padding: 5rem 0;
   background: linear-gradient(180deg, var(--bg-mid), #0a1208);
@@ -972,7 +976,6 @@ input {
   font-family: var(--font-pixel);
 }
 
-/* SPONSORS FAQ FINAL FOOTER */
 .sponsors {
   padding: 4.5rem 0;
   background: var(--bg);
@@ -1284,7 +1287,6 @@ input {
   }
 }
 
-/* ===== IMAGE-BASED BACKGROUNDS (overrides) ===== */
 .hero-bg-img {
   position: absolute;
   inset: 0;
@@ -1313,7 +1315,6 @@ input {
   z-index: 10;
 }
 
-/* ABOUT with image */
 .about {
   position: relative;
   padding: 5.5rem 0 4rem;
@@ -1404,22 +1405,21 @@ input {
   animation: wifiBars 2.4s ease-in-out infinite;
 }
 
-/* Top of icon = outer arcs; bottom = center dot */
 @keyframes wifiBars {
   0%, 8% {
-    clip-path: inset(72% 0 0 0);   /* dot only */
+    clip-path: inset(72% 0 0 0); 
     opacity: 0.85;
   }
   20%, 32% {
-    clip-path: inset(48% 0 0 0);   /* ~1 arc */
+    clip-path: inset(48% 0 0 0);   
     opacity: 1;
   }
   44%, 56% {
-    clip-path: inset(24% 0 0 0);   /* ~2 arcs */
+    clip-path: inset(24% 0 0 0);  
     opacity: 1;
   }
   68%, 88% {
-    clip-path: inset(0 0 0 0);     /* full signal */
+    clip-path: inset(0 0 0 0);    
     opacity: 1;
   }
   100% {
@@ -1447,7 +1447,6 @@ input {
   image-rendering: pixelated;
 }
 
-/* TIMELINE with 3 layered backgrounds */
 .timeline-sec {
   position: relative;
   overflow: hidden;
@@ -1523,7 +1522,6 @@ input {
   box-shadow: 0 0 16px rgba(95, 175, 61, 0.45);
 }
 
-/* REGISTER characters as images */
 .char-img {
   width: 72px;
   height: auto;
@@ -1548,7 +1546,6 @@ input {
   filter: grayscale(0);
 }
 
-/* PRIZES with background image */
 .prizes {
   position: relative;
   padding: 5rem 0;
@@ -1585,7 +1582,6 @@ input {
   gap: 0.85rem;
 }
 
-/* SPONSORS with background */
 .sponsors {
   position: relative;
   padding: 4.5rem 0;
@@ -1615,7 +1611,6 @@ input {
   z-index: 2;
 }
 
-/* FAQ with workshop background */
 .faq {
   position: relative;
   padding: 5rem 0;
@@ -1645,7 +1640,6 @@ input {
   z-index: 2;
 }
 
-/* FINAL with night campfire */
 .final {
   position: relative;
   padding: 6.5rem 0;
@@ -1706,7 +1700,6 @@ input {
   }
 }
 
-/* ===== SPONSORS — village signs ===== */
 .sponsors {
   position: relative;
   padding: 5.5rem 0 6rem;
@@ -1868,8 +1861,6 @@ input {
   }
 }
 
-/* ===== MOBILE BACKGROUND FRAMING ===== */
-/* Prefer sky / sun / moon / mountains over ground on small screens */
 @media (max-width: 768px) {
   .tl-bg {
     background-position: right 58% !important;
@@ -1895,7 +1886,6 @@ input {
   }
 }
 
-/* Very small phones: bias even more toward sky */
 @media (max-width: 420px) {
   .tl-bg {
     background-position: right 22% !important;
@@ -1906,7 +1896,6 @@ input {
   }
 }
 
-/* Landscape phones / short height: keep horizon visible */
 @media (max-width: 900px) and (max-height: 500px) {
   .tl-bg {
     background-position: center 40% !important;
