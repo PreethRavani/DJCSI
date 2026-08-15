@@ -521,6 +521,7 @@ input {
   color: var(--grass);
   letter-spacing: 0.04em;
   margin-bottom: 2px;
+  text-align: center;
 }
 .feat-text span {
   color: var(--muted);

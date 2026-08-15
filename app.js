@@ -8,7 +8,7 @@ const li = setInterval(() => {
     clearInterval(li);
   }
   loaderFill.style.width = lp + "%";
-  if (lp >= 100) setTimeout(() => loader.classList.add("done"), 5000);
+  if (lp >= 100) setTimeout(() => loader.classList.add("done"), 3000);
 }, 120);
 
 let lenis;
