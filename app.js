@@ -89,6 +89,7 @@ document.querySelectorAll(".faq-q").forEach((btn) => {
 });
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 gsap.from(".hero-badge", { y: 24, opacity: 0, duration: 0.7, delay: 0.3 });
 gsap.from(".hero-line", {
   y: 36,
@@ -132,20 +133,16 @@ gsap.from(".feat", {
 });
 
 const dCards = gsap.utils.toArray(".domain-card");
-const isMobile = () => window.matchMedia("(max-width:768px)").matches;
-if (isMobile()) {
-  dCards.forEach((c) => {
-    c.classList.add("visible");
-    gsap.set(c, { opacity: 1, scale: 1, y: 0 });
-  });
-} else {
+
+function setupDomainsPin(endMultiplier) {
   ScrollTrigger.create({
     trigger: "#domainsPin",
     start: "top top",
-    end: () => `+=${dCards.length * 200}`,
+    end: () => `+=${dCards.length * endMultiplier}`,
     pin: true,
     scrub: 0.5,
     anticipatePin: 1,
+    invalidateOnRefresh: true,
     onUpdate: (self) => {
       const p = self.progress;
       const step = 1 / dCards.length;
@@ -173,6 +170,13 @@ if (isMobile()) {
     },
   });
 }
+
+ScrollTrigger.matchMedia({
+  "(min-width: 769px)": () => setupDomainsPin(200),
+  "(max-width: 768px)": () => setupDomainsPin(130),
+});
+
+window.addEventListener("load", () => ScrollTrigger.refresh());
 
 // Timeline event typewriter
 let tlTwIdx = 0;
@@ -206,68 +210,60 @@ const tlBgSunset = document.getElementById("tlBgSunset");
 const tlBgNight = document.getElementById("tlBgNight");
 const tlContent = document.getElementById("tlContent");
 const tlProgress = document.getElementById("tlProgress");
-ScrollTrigger.create({
-  trigger: "#timelinePin",
-  start: "top top",
-  end: "+=2000",
-  pin: true,
-  scrub: 0.4,
-  onUpdate: (self) => {
-    const p = self.progress;
-    tlProgress.style.width = p * 100 + "%";
-    // Background arc aligned to event clock:
-    // 5–9 PM  → sunset   (check-in, kickoff, into dinner)
-    // 9 PM–6 AM → night  (dinner, midnight — stays dark past 2 AM)
-    // ~6–11 AM → day     (sunrise around 6 AM, breakfast at 9 AM)
-    // afternoon → sunset (closing at 6 PM)
-    //
-    // 6 nodes → progress roughly: 0, .17, .33, .50, .67, .83
-    // Keep night until ~0.58 (after midnight node), then sunrise.
-    let dayOp = 0,
-      sunOp = 0,
-      nightOp = 0;
-    if (p < 0.22) {
-      // Check-in + Kickoff: full sunset
-      sunOp = 1;
-    } else if (p < 0.32) {
-      // Dinner approach: sunset → night
-      const t = (p - 0.22) / 0.1;
-      sunOp = 1 - t;
-      nightOp = t;
-    } else if (p < 0.58) {
-      // Dinner + Midnight (2 AM): stay night through ~6 AM
-      nightOp = 1;
-    } else if (p < 0.66) {
-      // ~6 AM sunrise: night → day
-      const t = (p - 0.58) / 0.08;
-      nightOp = 1 - t;
-      dayOp = t;
-    } else if (p < 0.78) {
-      // Breakfast / morning: full day
-      dayOp = 1;
-    } else if (p < 0.9) {
-      // Afternoon → closing sunset
-      const t = (p - 0.78) / 0.12;
-      dayOp = 1 - t;
-      sunOp = t;
-    } else {
-      // Closing: sunset
-      sunOp = 1;
-    }
-    if (tlBgDay) tlBgDay.style.opacity = String(dayOp);
-    if (tlBgSunset) tlBgSunset.style.opacity = String(sunOp);
-    if (tlBgNight) tlBgNight.style.opacity = String(nightOp);
-    // "night" class only for pure night stretch (for any leftover styles)
-    const isDark = nightOp > 0.5 || (sunOp > 0.5 && p > 0.7);
-    tlContent.classList.toggle("night", isDark);
-    const ni = Math.min(Math.floor(p * tlNodes.length), tlNodes.length - 1);
-    tlNodes.forEach((n, i) => n.classList.toggle("active", i <= ni));
-    if (ni !== tlLastNode && tlNodes[ni]) {
-      tlLastNode = ni;
-      const desc = tlNodes[ni].getAttribute("data-desc") || "";
-      if (desc) tlTypeWriter(desc);
-    }
-  },
+function setupTimelinePin(endMultiplier) {
+  ScrollTrigger.create({
+    trigger: "#timelinePin",
+    start: "top top",
+    end: () => `+=${window.innerHeight * endMultiplier}`,
+    pin: true,
+    scrub: 0.4,
+    invalidateOnRefresh: true,
+    anticipatePin: 1,
+    onUpdate: (self) => {
+      const p = self.progress;
+      tlProgress.style.width = p * 100 + "%";
+      let dayOp = 0, sunOp = 0, nightOp = 0;
+      if (p < 0.22) {
+        sunOp = 1;
+      } else if (p < 0.32) {
+        const t = (p - 0.22) / 0.1;
+        sunOp = 1 - t;
+        nightOp = t;
+      } else if (p < 0.58) {
+        nightOp = 1;
+      } else if (p < 0.66) {
+        const t = (p - 0.58) / 0.08;
+        nightOp = 1 - t;
+        dayOp = t;
+      } else if (p < 0.78) {
+        dayOp = 1;
+      } else if (p < 0.9) {
+        const t = (p - 0.78) / 0.12;
+        dayOp = 1 - t;
+        sunOp = t;
+      } else {
+        sunOp = 1;
+      }
+      if (tlBgDay) tlBgDay.style.opacity = String(dayOp);
+      if (tlBgSunset) tlBgSunset.style.opacity = String(sunOp);
+      if (tlBgNight) tlBgNight.style.opacity = String(nightOp);
+      const isDark = nightOp > 0.5 || (sunOp > 0.5 && p > 0.7);
+      tlContent.classList.toggle("night", isDark);
+      const ni = Math.min(Math.floor(p * tlNodes.length), tlNodes.length - 1);
+      tlNodes.forEach((n, i) => n.classList.toggle("active", i <= ni));
+      if (ni !== tlLastNode && tlNodes[ni]) {
+        tlLastNode = ni;
+        const desc = tlNodes[ni].getAttribute("data-desc") || "";
+        if (desc) tlTypeWriter(desc);
+      }
+    },
+  });
+}
+
+ScrollTrigger.matchMedia({
+  "(min-width: 769px)": () => setupTimelinePin(3.2),
+  "(min-width: 421px) and (max-width: 768px)": () => setupTimelinePin(2.6),
+  "(max-width: 420px)": () => setupTimelinePin(2.2),
 });
 
 gsap.to(".prize-card", {
@@ -277,14 +273,6 @@ gsap.to(".prize-card", {
   stagger: 0.15,
   ease: "power2.out",
   scrollTrigger: { trigger: "#prizeList", start: "top 75%" },
-});
-
-gsap.to(".sponsor-item", {
-  opacity: 1,
-  y: 0,
-  duration: 0.5,
-  stagger: 0.1,
-  scrollTrigger: { trigger: "#sponsorGrid", start: "top 80%" },
 });
 
 const sections = [
