@@ -6,6 +6,7 @@ const li = setInterval(() => {
   if (lp >= 100) {
     lp = 100;
     clearInterval(li);
+    playLevelUp();
   }
   loaderFill.style.width = lp + "%";
   if (lp >= 100) setTimeout(() => loader.classList.add("done"), 3000);
@@ -25,6 +26,14 @@ function scrollToId(id) {
   else el.scrollIntoView({ behavior: "smooth" });
 }
 
+const sfx = document.getElementById("enterSfx");
+sfx.volume = 0.5;
+function playLevelUp() {
+  if (!sfx) return;
+  sfx.currentTime = 0;
+  sfx.play().catch(() => {
+  });
+}
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () =>
   nav.classList.toggle("scrolled", window.scrollY > 50),

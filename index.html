@@ -22,12 +22,16 @@
   </head>
   <body>
     <div class="loader" id="loader">
+      <div class="loader-hint" id="loaderHint" hidden>Click to enter the world</div>
       <div class="loader-cube"></div>
       <div class="loader-text">LOADING WORLD...</div>
       <div class="loader-bar">
         <div class="loader-fill" id="loaderFill"></div>
       </div>
     </div>
+<audio id="enterSfx" preload="auto">
+  <source src="assets/audio/levelup.mp3" type="audio/mpeg" />
+</audio>
 
     <nav class="nav" id="nav">
       <div class="nav-inner">
@@ -62,7 +66,6 @@
       <a href="#faq" class="m-link">FAQ</a>
     </div>
 
-    <!-- HERO -->
     <section class="hero" id="hero">
       <div
         class="hero-bg-img"
@@ -94,7 +97,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section class="about" id="about">
       <div
         class="about-bg"
@@ -175,7 +177,6 @@
 
     <div class="grass-strip"></div>
 
-    <!-- DOMAINS -->
     <section class="domains" id="domains">
       <div class="domains-pin" id="domainsPin">
         <div class="domains-header">
@@ -249,7 +250,6 @@
       </div>
     </section>
 
-    <!-- TIMELINE -->
     <section class="timeline-sec" id="timeline">
       <div class="timeline-pin" id="timelinePin">
         <div
@@ -356,7 +356,6 @@
       </div>
     </section>
 
-    <!-- REGISTER -->
     <section class="register" id="register">
       <div class="container">
         <div class="reg-header">
@@ -465,7 +464,6 @@
       </div>
     </section>
 
-    <!-- PRIZES -->
     <section class="prizes" id="prizes">
       <div
         class="prizes-bg"
@@ -506,7 +504,6 @@
       </div>
     </section>
 
-    <!-- SPONSORS -->
     <section class="sponsors" id="sponsors">
       <div
         class="sponsors-bg"
@@ -556,7 +553,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="faq" id="faq">
       <div
         class="faq-bg"
@@ -611,7 +607,6 @@
       </div>
     </section>
 
-    <!-- FINAL -->
     <section class="final" id="final">
       <div
         class="final-bg"
