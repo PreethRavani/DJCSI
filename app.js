@@ -6,7 +6,7 @@ const li = setInterval(() => {
   if (lp >= 100) {
     lp = 100;
     clearInterval(li);
-    playLevelUp();
+    playLevelUp(); // play on load complete
   }
   loaderFill.style.width = lp + "%";
   if (lp >= 100) setTimeout(() => loader.classList.add("done"), 3000);
@@ -28,11 +28,29 @@ function scrollToId(id) {
 
 const sfx = document.getElementById("enterSfx");
 sfx.volume = 0.5;
+let sfxPlayed = false;
 function playLevelUp() {
-  if (!sfx) return;
+  if (!sfx || sfxPlayed) return;
   sfx.currentTime = 0;
-  sfx.play().catch(() => {
-  });
+  sfx
+    .play()
+    .then(() => {
+      sfxPlayed = true;
+    })
+    .catch(() => {
+      // Autoplay blocked — play on next click
+      const unlock = () => {
+        if (sfxPlayed) return;
+        sfx.currentTime = 0;
+        sfx.play().then(() => {
+          sfxPlayed = true;
+        }).catch(() => {});
+        document.removeEventListener("click", unlock);
+        document.removeEventListener("touchstart", unlock);
+      };
+      document.addEventListener("click", unlock);
+      document.addEventListener("touchstart", unlock);
+    });
 }
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () =>
