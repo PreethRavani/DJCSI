@@ -105,14 +105,6 @@ Visitors travel through day/sunset/night environments, pick challenge domains, f
 
 ## Screenshots
 
-| Section  | Preview                                 |
-| -------- | --------------------------------------- |
-| Hero     | _Add `assets/screenshots/hero.png`_     |
-| Domains  | _Add `assets/screenshots/domains.png`_  |
-| Timeline | _Add `assets/screenshots/timeline.png`_ |
-| Register | _Add `assets/screenshots/team.png`_     |
-
-```markdown
 ![Hero](assets/screenshots/hero.png)
 ![About](assets/screenshots/about.png)
 ![Domains](assets/screenshots/domains.png)
@@ -122,7 +114,6 @@ Visitors travel through day/sunset/night environments, pick challenge domains, f
 ![Sponsors](assets/screenshots/sponsors.png)
 ![FAQs](assets/screenshots/faqs.png)
 ![Footer](assets/screenshots/footer.png)
-```
 
 ---
 
