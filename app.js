@@ -52,6 +52,7 @@ function playLevelUp() {
       document.addEventListener("touchstart", unlock);
     });
 }
+
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () =>
   nav.classList.toggle("scrolled", window.scrollY > 50),
@@ -100,7 +101,20 @@ function handleReg(e) {
   setTimeout(() => {
     btn.textContent = "Register Now";
     btn.style.background = "";
-    alert("Registration received, Stay Tuned For Updates!");
+    
+    // Show MC Toast
+    const toast = document.getElementById("mcToast");
+    if (toast) {
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 4000);
+      
+      // Play level up sound for achievement
+      const sfx = document.getElementById("enterSfx");
+      if (sfx) {
+        sfx.currentTime = 0;
+        sfx.play().catch(e=>{});
+      }
+    }
   }, 1400);
 }
 
@@ -338,3 +352,204 @@ ScrollTrigger.create({
     }
   },
 });
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.offsetHeight;
+  const winHeight = window.innerHeight;
+  const scrollPercent = (scrollTop / (docHeight - winHeight)) || 0;
+  
+  const xpFill = document.getElementById("xpBarFill");
+  const xpText = document.getElementById("xpText");
+  if (xpFill && xpText) {
+    const p = Math.min(100, Math.max(0, scrollPercent * 100));
+    xpFill.style.width = p + "%";
+    xpText.innerText = Math.floor(p);
+  }
+});
+
+const creeper = document.getElementById("creeperPopup");
+if (creeper) {
+  setInterval(() => {
+    if (Math.random() > 0.6 && !creeper.classList.contains("swell")) {
+      creeper.classList.add("peek");
+      setTimeout(() => {
+        if (!creeper.classList.contains("swell")) {
+          creeper.classList.remove("peek");
+        }
+      }, 4000);
+    }
+  }, 6000);
+
+  creeper.addEventListener("mouseenter", () => {
+    if (creeper.classList.contains("swell")) return;
+    creeper.classList.add("swell");
+    
+    const explodeSfx = document.getElementById("explodeSfx");
+    if(explodeSfx) {
+      explodeSfx.currentTime = 0;
+      explodeSfx.play().catch(e=>console.error("Explosion audio error:", e));
+    }
+    
+    setTimeout(() => {
+      document.body.classList.add("shake-active");
+      const rect = creeper.getBoundingClientRect();
+      createExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      
+      setTimeout(() => document.body.classList.remove("shake-active"), 500);
+      creeper.style.display = "none";
+      
+      setTimeout(() => {
+        creeper.classList.remove("swell", "peek");
+        creeper.style.display = "block";
+      }, 15000);
+    }, 1500);
+  });
+}
+
+function createExplosion(x, y) {
+  const colors = ["#ffffff", "#cccccc", "#ffaa00", "#ff0000", "#53b853"];
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement("div");
+    p.className = "explosion-particle";
+    p.style.left = x + "px";
+    p.style.top = y + "px";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(p);
+    
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 5 + Math.random() * 20;
+    const vx = Math.cos(angle) * velocity;
+    const vy = Math.sin(angle) * velocity;
+    
+    let curX = x;
+    let curY = y;
+    let opacity = 1;
+    
+    function animateParticle() {
+      curX += vx;
+      curY += vy;
+      opacity -= 0.02;
+      p.style.left = curX + "px";
+      p.style.top = curY + "px";
+      p.style.opacity = opacity;
+      
+      if (opacity > 0) {
+        requestAnimationFrame(animateParticle);
+      } else {
+        p.remove();
+      }
+    }
+    requestAnimationFrame(animateParticle);
+  }
+}
+
+function createBlockParticles(e, color) {
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement("div");
+    p.style.position = "fixed";
+    p.style.width = "8px";
+    p.style.height = "8px";
+    p.style.background = color || "var(--grass)";
+    p.style.left = e.clientX + "px";
+    p.style.top = e.clientY + "px";
+    p.style.zIndex = 9999;
+    p.style.pointerEvents = "none";
+    p.style.boxShadow = "inset -2px -2px 0 rgba(0,0,0,0.2)";
+    document.body.appendChild(p);
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 3 + Math.random() * 8;
+    let vx = Math.cos(angle) * velocity;
+    let vy = Math.sin(angle) * velocity;
+    
+    let curX = e.clientX;
+    let curY = e.clientY;
+    
+    function animate() {
+      vy += 0.5; // gravity
+      curX += vx;
+      curY += vy;
+      p.style.left = curX + "px";
+      p.style.top = curY + "px";
+      
+      if (curY < window.innerHeight + 50) {
+        requestAnimationFrame(animate);
+      } else {
+        p.remove();
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const targetBtn = e.target.closest(".btn") || e.target.closest(".nav-cta");
+  if (targetBtn) {
+    const style = window.getComputedStyle(targetBtn);
+    let bg = style.backgroundColor;
+    if (bg === "rgba(0, 0, 0, 0)" || bg === "transparent") {
+      bg = "var(--warm)";
+    }
+    createBlockParticles(e, bg);
+  }
+});
+
+const cursor = document.createElement("div");
+cursor.id = "custom-cursor";
+document.body.appendChild(cursor);
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = (e.clientY - 40) + "px"; 
+});
+
+const swooshSfx = document.getElementById("swooshSfx");
+if (swooshSfx) swooshSfx.volume = 0.5;
+
+document.addEventListener("mousedown", (e) => {
+  cursor.classList.add("swoosh");
+  
+  if (e.target.closest("button") || e.target.closest("a") || e.target.closest(".char") || e.target.closest(".faq-q") || e.target.closest(".size-opt")) {
+    if (swooshSfx) {
+      swooshSfx.currentTime = 0;
+      swooshSfx.play().catch(err => console.log(err));
+    }
+  }
+  
+  setTimeout(() => {
+    cursor.classList.remove("swoosh");
+  }, 200);
+});
+
+const portalOverlay = document.createElement("div");
+portalOverlay.className = "nether-portal-overlay";
+document.body.appendChild(portalOverlay);
+
+const btnHeroReg = document.querySelector(".hero .btn-primary");
+if (btnHeroReg) {
+  btnHeroReg.removeAttribute("onclick");
+  btnHeroReg.addEventListener("click", (e) => {
+    e.preventDefault();
+    const portalSfx = document.getElementById("portalSfx");
+    if(portalSfx) {
+      portalSfx.currentTime = 0;
+      portalSfx.play().catch(e=>console.error("Portal audio error:", e));
+    }
+    
+    portalOverlay.classList.add("active");
+    
+    setTimeout(() => {
+      scrollToId('register');
+      document.body.classList.add("nether-mode");
+      
+      setTimeout(() => {
+        portalOverlay.classList.remove("active");
+        
+        setTimeout(() => {
+          document.body.classList.remove("nether-mode");
+        }, 6000); 
+      }, 1000);
+    }, 2000);
+  });
+}

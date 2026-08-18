@@ -106,6 +106,8 @@
       ></div>
       <div class="about-overlay"></div>
       <div class="container about-inner">
+        <div class="parallax-ore ore-diamond" data-speed="0.3" style="top: 10%; right: 5%;"></div>
+        <div class="parallax-ore ore-redstone" data-speed="-0.2" style="bottom: 20%; left: 2%;"></div>
         <p class="sec-label">
           <span class="sec-num">01</span> ABOUT BRICKCRAFT
         </p>
@@ -473,6 +475,8 @@
       ></div>
       <div class="prizes-overlay"></div>
       <div class="container prizes-inner">
+        <div class="parallax-ore ore-gold" data-speed="0.4" style="top: 15%; left: 10%;"></div>
+        <div class="parallax-ore ore-diamond" data-speed="-0.3" style="bottom: 15%; right: 10%;"></div>
         <div class="prizes-header">
           <p class="sec-label">
             <span class="sec-num">05</span> AMAZING PRIZES
@@ -562,6 +566,8 @@
       ></div>
       <div class="faq-overlay"></div>
       <div class="container faq-inner">
+        <div class="parallax-ore ore-redstone" data-speed="0.2" style="top: 30%; right: 12%;"></div>
+        <div class="parallax-ore ore-gold" data-speed="-0.1" style="bottom: 10%; left: 8%;"></div>
         <div class="faq-header">
           <p class="sec-label"><span class="sec-num">07</span> FAQ</p>
           <h2 class="sec-title">Crafting Answers</h2>
@@ -643,6 +649,39 @@
         <div class="footer-copy">&copy; 2026 DJSCSI. All rights reserved.</div>
       </div>
     </footer>
+    <!-- XP Progress Bar -->
+    <div class="xp-bar-container">
+      <div class="xp-bar-text">XP <span id="xpText">0</span></div>
+      <div class="xp-bar-fill" id="xpBarFill"></div>
+    </div>
+
+    <!-- Creeper Popup -->
+    <div class="creeper-popup" id="creeperPopup" style="background: url('assets/characters/creeper.png') center/cover no-repeat; border: none; overflow: hidden; image-rendering: pixelated;">
+    </div>
+
+    <!-- Minecraft Toast Notification -->
+    <div class="mc-toast" id="mcToast">
+      <div class="mc-toast-inner">
+        <img src="assets/characters/creeper.png" alt="" class="toast-icon" onerror="this.style.display='none'">
+        <div class="toast-text">
+          <span class="toast-title">Achievement Unlocked!</span>
+          <span class="toast-desc">Party Registered.</span>
+        </div>
+      </div>
+    </div>
+
+    <audio id="swooshSfx" preload="auto">
+      <source src="assets/audio/swordswing.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="portalSfx" preload="auto">
+      <source src="assets/audio/portal.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="explodeSfx" preload="auto">
+      <source src="assets/audio/creeper-explosion.mp3" type="audio/mpeg" />
+    </audio>
+
     <script src="app.js"></script>
   </body>
 </html>

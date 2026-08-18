@@ -97,6 +97,7 @@ Visitors travel through day/sunset/night environments, pick challenge domains, f
 │   ├── backgrounds/        # Hero, about, timeline, prizes, sponsors, FAQ, final
 │   ├── characters/         # Steve + team member sprites
 │   ├── icons/              # Domain icons, favicon
+|   ├── screenshots/        # Page screenshots for readme file
 │   └── timeline/           # Timeline node icons
 └── README.md
 ```

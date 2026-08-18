@@ -1898,3 +1898,205 @@ input {
     background-position: center 40% !important;
   }
 }
+
+/* --- XP Progress Bar --- */
+.xp-bar-container {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 480px;
+  height: 12px;
+  background: #1a1a1a;
+  border: 2px solid #000;
+  box-shadow: inset 0 2px 0 rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 1000;
+  pointer-events: none;
+}
+.xp-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #80ff20;
+  box-shadow: inset 0 2px 0 #a0ff60, inset 0 -2px 0 #60c010;
+  transition: width 0.1s ease-out;
+}
+.xp-bar-text {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: #80ff20;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+}
+
+/* --- Creeper Popup --- */
+.creeper-popup {
+  position: fixed;
+  bottom: 40px;
+  right: -100px;
+  width: 80px;
+  height: 80px;
+  background: #53b853;
+  border: 4px solid #1a3a1a;
+  z-index: 999;
+  cursor: pointer;
+  transition: right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s, filter 0.2s;
+  box-shadow: -4px 4px 0 rgba(0,0,0,0.4);
+}
+.creeper-popup.peek {
+  right: 0;
+}
+.creeper-popup.swell {
+  animation: creeperSwell 1.5s ease-in forwards;
+}
+@keyframes creeperSwell {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.2); filter: brightness(2) hue-rotate(90deg); }
+  90% { transform: scale(1.5); filter: brightness(3); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.creeper-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.creeper-face div {
+  position: absolute;
+  background: #000;
+}
+.creeper-face .eye { width: 20%; height: 20%; top: 25%; }
+.creeper-face .eye.left { left: 20%; }
+.creeper-face .eye.right { right: 20%; }
+.creeper-face .mouth-center { width: 20%; height: 30%; top: 45%; left: 40%; }
+.creeper-face .mouth-left { width: 20%; height: 40%; top: 45%; left: 20%; }
+.creeper-face .mouth-right { width: 20%; height: 40%; top: 45%; right: 20%; }
+
+/* --- Explosion Shake --- */
+@keyframes shakeScreen {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-10px, -10px) rotate(-1deg); }
+  20% { transform: translate(10px, -10px) rotate(1deg); }
+  30% { transform: translate(-10px, 10px) rotate(-1deg); }
+  40% { transform: translate(10px, 10px) rotate(1deg); }
+  50% { transform: translate(-10px, -10px) rotate(-1deg); }
+  60% { transform: translate(10px, -10px) rotate(1deg); }
+  70% { transform: translate(-10px, 10px) rotate(-1deg); }
+  80% { transform: translate(10px, 10px) rotate(1deg); }
+  90% { transform: translate(-10px, -10px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+.shake-active {
+  animation: shakeScreen 0.5s ease-in-out;
+}
+.explosion-particle {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  z-index: 10000;
+  pointer-events: none;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+body, a, button, input, .faq-q, .size-opt, .m-link, .nav-cta, .btn {
+  cursor: none !important;
+}
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAJFBMVEUAAAAOPzYIJSAz68uk/fArx6weincVY1VoTh5JNhUoHguJZycazUdMAAAAAXRSTlMAQObYZgAAAExJREFUGNN1jsENwDAMAgGndpLuv29/jZFa/+4QwkA/ks5jyPky8cHxwyQAxslZNAaYiux9Zlb4A0XjNcVu1r0hvYacGwB0Rq0OSC4ehwkBE0lygnsAAAAASUVORK5CYII=');
+  background-size: contain;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 100000;
+  transform-origin: bottom left;
+  transition: transform 0.05s ease;
+}
+#custom-cursor.swoosh {
+  animation: swordSwoosh 0.2s ease-out;
+}
+@keyframes swordSwoosh {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(70deg) translateY(10px); }
+  100% { transform: rotate(0deg); }
+}
+
+.mc-toast {
+  position: fixed;
+  top: -100px;
+  right: 20px;
+  background: #3c3c3c;
+  border: 4px solid #000;
+  border-top-color: #8b8b8b;
+  border-left-color: #8b8b8b;
+  border-bottom-color: #111111;
+  border-right-color: #111111;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+  padding: 12px 16px;
+  z-index: 10000;
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.mc-toast.show {
+  top: 80px;
+}
+.mc-toast-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.mc-toast .toast-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+.mc-toast .toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mc-toast .toast-title {
+  color: #ffff55;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  text-shadow: 2px 2px 0 #3f3f15;
+}
+.mc-toast .toast-desc {
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.nether-portal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: radial-gradient(circle, #5C168A 0%, #200030 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999999;
+  transition: opacity 0.8s ease;
+  display: flex; justify-content: center; align-items: center;
+}
+.nether-portal-overlay.active {
+  opacity: 1; 
+  pointer-events: all;
+  animation: portalWobble 0.5s ease-in-out infinite alternate;
+}
+@keyframes portalWobble {
+  0% { filter: hue-rotate(0deg) blur(2px); transform: scale(1); }
+  100% { filter: hue-rotate(20deg) blur(6px); transform: scale(1.05); }
+}
+body.nether-mode {
+  background-color: #2b0000 !important;
+}
+body.nether-mode #register {
+  filter: sepia(1) hue-rotate(-50deg) saturate(3);
+  transition: filter 1s ease;
+}
